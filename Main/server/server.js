@@ -13,13 +13,6 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: true,
-  context: ({ req }) => {
-    // Get the token from req.context
-    const token = req.context.token;
-    // Add any other context properties if needed
-    return { token };
-  },
 });
 
 const app = express();
