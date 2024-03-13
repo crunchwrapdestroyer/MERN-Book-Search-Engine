@@ -1,4 +1,6 @@
+// Import the Express router
 const router = require('express').Router();
+// Import controller methods for user-related operations
 const {
   createUser,
   getSingleUser,
@@ -7,16 +9,22 @@ const {
   login,
 } = require('../../controllers/user-controller');
 
-// import middleware
+// Import authentication middleware
 const { authMiddleware } = require('../../utils/auth');
 
-// put authMiddleware anywhere we need to send a token for verification of user
+// Define routes for user-related operations
+
+// Route to create a new user
 router.route('/').post(createUser).put(authMiddleware, saveBook);
 
+// Route to login a user
 router.route('/login').post(login);
 
+// Route to get information about the current user
 router.route('/me').get(authMiddleware, getSingleUser);
 
+// Route to delete a saved book for the current user
 router.route('/books/:bookId').delete(authMiddleware, deleteBook);
 
+// Export the router
 module.exports = router;
